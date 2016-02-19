@@ -74,13 +74,11 @@ class MyBinaryTreeInArray
         } else {
 
             if ($value > $this->tree[$index]) {
-                return course($index, $this->getRightIndex($index));
+                return $this->course($this->getRightIndex($index), $value);
             } else {
-                return course($index, $this->getLeftIndex($index));
+                return $this->course($this->getLeftIndex($index), $value);
             }
         }
-
-        /** @TODO */
     }
 
     /**
