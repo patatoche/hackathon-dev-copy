@@ -45,7 +45,37 @@ class MaxiInteger
      */
     private function realSum($a, $b)
     {
-        /** @TODO */
+        $result = '';
+
+        $plopA = $a->getReverseValue();
+        $plopB = $b->getReverseValue();
+
+        $maxLength = max(strlen($plopA), strlen($plopB));
+
+        $plopA = str_pad($plopA, $maxLength - strlen($plopA), "0");
+        $plopB = str_pad($plopB, $maxLength - strlen($plopB), "0");
+
+        $i = 0;
+
+        $retenue = 0;
+        while ($i < $maxLength) {
+            $sum = $plopA[$i] + $plopB[$i] + $retenue;
+            if ($sum >= 10) {
+                $sum -= 10;
+                $retenue = 1;
+            } else {
+                $retenue = 0;
+            }
+            $result .= $sum;
+
+            $i++;
+        }
+
+        if ($retenue > 0) {
+            $result .= $retenue;
+        }
+
+        return new MaxiInteger(strrev($result));
     }
 
     private function setValue($value)
@@ -58,6 +88,12 @@ class MaxiInteger
     {
         return $this->value;
     }
+
+    public function getReverseValue()
+    {
+        return $this->reverse;
+    }
+
 
     private function getNthOfMaxiInteger($n)
     {
